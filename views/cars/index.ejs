@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+
+<h2>Danh Sách Xe</h2>
+
+<form method="GET" action="/cars">
+    <input type="text" name="search" placeholder="Tìm kiếm xe..." value="<%= typeof search !== 'undefined' ? search : '' %>">
+    <button type="submit">Tìm</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Tên Xe</th>
+            <th>Hãng Sản Xuất</th>
+            <th>Năm Sản Xuất</th>
+            <th>Giá Bán</th>
+            <th>Hành Động</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% cars.forEach(car => { %>
+            <tr>
+                <td><a href="/cars/<%= car._id %>"><%= car.name %></a></td>
+                <td><%= car.manufacturer %></td>
+                <td><%= car.year %></td>
+                <td><%= car.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %></td>
+                <td>
+                    <a href="/cars/<%= car._id %>/edit">Sửa</a>
+                    <form action="/cars/<%= car._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa xe này?')">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+<%- include('../partials/footer') %>

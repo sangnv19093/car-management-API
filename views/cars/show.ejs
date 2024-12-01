@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+
+<h2>Chi Tiết Xe</h2>
+
+<ul>
+    <li><strong>Tên Xe:</strong> <%= car.name %></li>
+    <li><strong>Hãng Sản Xuất:</strong> <%= car.manufacturer %></li>
+    <li><strong>Năm Sản Xuất:</strong> <%= car.year %></li>
+    <li><strong>Giá Bán:</strong> <%= car.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %></li>
+    <li><strong>Mô Tả:</strong> <%= car.description %></li>
+</ul>
+
+<a href="/cars/<%= car._id %>/edit">Sửa Thông Tin Xe</a>
+<form action="/cars/<%= car._id %>?_method=DELETE" method="POST" style="display:inline;">
+    <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa xe này?')">Xóa Xe</button>
+</form>
+<a href="/cars">Quay Lại Danh Sách</a>
+
+<%- include('../partials/footer') %>
